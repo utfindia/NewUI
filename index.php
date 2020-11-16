@@ -4,7 +4,12 @@
  <!-- Required meta tags -->
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content ="width=device-width,initial-scale=1,user-scalable=yes" /> -->
+
+<!-- <meta id="Viewport" name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"> -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, viewport-fit=cover">
+
  <meta name="keywords" content="ICC NEW LOBBY" />
  <meta name="description" content="ICC NEW LOBBY">
  <meta name="author" content="ICC NEW LOBBY">
@@ -19,14 +24,20 @@
 
 <body id="lobby-body-bg">
 
+
+
 <div class="rt">
-  <!-- <img src="public/images/rotate-phone.gif" class="img-responsive fill">
- <h4>Please rotate your phone to see an Exhibition</h4>
-</div> -->
-<button onclick="start()">
-  Start
+   <img src="public/images/rotate-phone.gif" class="img-responsive fill">
+ <h4>Please rotate and switch on auto rotate in settings to see this expo</h4>
+<button onclick="rotate(this)" id="button">
+  Swith to Landscape
 </button>
-</div>
+<!--<button onclick="screen.orientation.unlock()">
+  Unlock
+</button> -->
+</div> 
+
+
 
 <div class="rt-n">
 
@@ -648,5 +659,10 @@
 <!-- JS Files -->
 <?php include "main_link_js.php";?>
 </div>
+
+
+
+
+
 </body>
 </html>

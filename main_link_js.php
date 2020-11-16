@@ -71,28 +71,45 @@ $('rt-n').show();
        });
          
 </script>
-
 <script>
-function start() {
-  /* Start application when in correct orientation */
+function fullScreenCheck() {
+  if (document.fullscreenElement) return;
+  return document.documentElement.requestFullscreen();
 }
-async function rotate() {
+
+function updateDetails(lockButton) {
+  const buttonOrientation = getOppositeOrientation();
+  lockButton.textContent = `Swith to ${buttonOrientation}`;
+}
+
+function getOppositeOrientation() {
+  const { type } = screen.orientation;
+  return type.startsWith("portrait") ? "landscape" : "portrait";
+}
+
+async function rotate(lockButton) {
   try {
-    await screen.orientation.lock("landscape");
-    start();
+    await fullScreenCheck();
   } catch (err) {
     console.error(err);
   }
-  const matchLandscape = matchMedia("(orientation: landscape)");
-  if (matchLandscape.matches) return start();
-  addEventListener("orientationchange", function listener() {
-    matchLandscape.addListener(function mediaChange(e) {
-      if (!e.matches) return;
-      removeEventListener("orientationchange", listener);
-      matchLandscape.removeListener(mediaChange);
-      start();
-    });
-  });
-  alert("To start, please rotate your screen to landscape.");
+  const newOrientation = getOppositeOrientation();
+  await screen.orientation.lock(newOrientation);
+  updateDetails(lockButton);
 }
+
+function show() {
+  const { type, angle } = screen.orientation;
+  console.log(`Orientation type is ${type} & angle is ${angle}.`);
+}
+
+screen.orientation.addEventListener("change", () => {
+  show();
+  updateDetails(document.getElementById("button"));
+});
+
+window.addEventListener("load", () => {
+  show();
+  updateDetails(document.getElementById("button"));
+});
 </script>
